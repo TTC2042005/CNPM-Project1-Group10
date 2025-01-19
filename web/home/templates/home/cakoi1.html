@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylecakoi1.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='KMG.jpg') }}" type="image/x-icon">
+    <title>Shop cá Koi uy tín</title>
+</head>
+
+<body>
+    <header>
+        <h1 class="elenment">Chào mừng bạn tới với shop cá koi uy tín</h1>
+    </header>
+    <nav class="nav-bar">
+        <div class="nav-item">
+            <a href="#about">Giới Thiệu</a>
+        </div>
+        <div class="nav-item">
+            <a href="#contact">Liên Hệ</a>
+        </div>
+        <div class="nav-item">
+            <a href="#gallery">Bộ Sưu Tập</a>
+        </div>
+        <div class="nav-item">
+            <a href="#hot">Tin tức</a>
+        </div>
+        <div class="nav-item">
+            <a href="#purchase">Mua Hàng</a>
+        </div>
+        <a href="{{ url_for('cakoi2') }}">Đăng nhập</a>
+        <ul class="social-icons">
+            <i class="fa-brands fa-facebook" style="color: #74C0FC;"></i>
+            <i class="fa-brands fa-instagram" style="color: #c81498;"></i>
+            <i class="fa-brands fa-twitter" style="color: #74C0FC;"></i>
+        </ul>
+    </nav>
+    <div>
+        <button class="di"><a href="{{ url_for('cakoi2') }}" target="_self">&#128722;</a></button>
+    </div>
+    <section class="hero">
+        <h1>Khám phá vẻ đẹp huyền diệu của Cá Koi</h1>
+    </section>
+
+    <section class="content" id="about">
+        <h2 class="al">Giới Thiệu</h2>
+        <p>
+            Cá Koi không chỉ là loài cá tuyệt đẹp mà còn mang ý nghĩa phong thủy độc đáo. Hãy cùng chúng tôi tìm hiểu và ngắm nhìn vẻ đẹp tuyệt trần này.
+        </p>
+    </section>
+
+    <section class="gallery" id="gallery">
+        <div class="image-container">
+            <div class="image-wrapper">
+                <img src="https://assets.onecompiler.app/4328wxt9j/433822x6j/ca3f5481-ca-koi.jpeg" alt="Cá Koi 1">
+                <div class="description">
+                    <p class="icc">Đây là đoạn văn giới thiệu về Cá Koi 1.</p>
+                </div>
+            </div>
+        </div>
+        <div class="image-container">
+            <div class="image-wrapper">
+                <img src="https://assets.onecompiler.app/4328wxt9j/433822x6j/ca-koi-2.jpeg" alt="Cá Koi 2">
+                <div class="description">
+                    <p class="icc">Đây là đoạn văn giới thiệu về Cá Koi 2.</p>
+                </div>
+            </div>
+        </div>
+        <div class="image-container">
+            <div class="image-wrapper">
+                <img src="https://assets.onecompiler.app/4328wxt9j/433822x6j/ca-koi-3.png" alt="Cá Koi 3">
+                <div class="description">
+                    <p class="icc">Đây là đoạn văn giới thiệu về Cá Koi 3.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section" id="hot">
+        <h2 class="candong">Video Giới Thiệu</h2>
+        <div class="video-wrapper">
+            <video controls>
+                <source src="{{ url_for('static', filename='CaKoi.mp4') }}" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
+    <!-- Purchase Section -->
+    <section class="purchase-section" id="purchase">
+        <h2 class="candong">Mua Hàng</h2>
+        <div class="purchase-form">
+            <form action="{{ url_for('submit_order') }}" method="post">
+                {{ order_form.csrf_token }}
+                <div class="form-group">
+                    {{ order_form.product.label }}: {{ order_form.product(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ order_form.quantity.label }}: {{ order_form.quantity(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ order_form.address.label }}: {{ order_form.address(class="form-control") }}
+                </div>
+                <button type="submit">Đặt hàng</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="orders-section" id="orders">
+        <h2>Tình Trạng Đơn Hàng</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Sản Phẩm</th>
+                    <th>Số Lượng</th>
+                    <th>Địa Chỉ</th>
+                    <th>Tình Trạng</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.product }}</td>
+                    <td>{{ order.quantity }}</td>
+                    <td>{{ order.address }}</td>
+                    <td>{{ order.status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <footer id="contact">
+        <p>&copy; 2023 Shop Cá Koi. All rights reserved.</p>
+        <p>Liên hệ:
+            <a href="mailto:TruongAN@gmail.com"><i class="fas fa-envelope"></i> TruongAN@gmail.com</a> | số điện thoại: <i class="fas fa-phone"></i> 0807408074
+        </p>
+        <div class="contact-form">
+            <h2>Liên Hệ Với Chúng Tôi</h2>
+            <h2>Liên Hệ Với Chúng Tôi</h2>
+            <form action="{{ url_for('submit_form') }}" method="post">
+                {{ contact_form.csrf_token }}
+                <div class="form-group">
+                    {{ contact_form.name.label }}: {{ contact_form.name(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ contact_form.email.label }}: {{ contact_form.email(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ contact_form.message.label }}: {{ contact_form.message(class="form-control") }}
+                </div>
+                <button type="submit">Gửi</button>
+            </form>
+        </div>
+
+        <div class="contact-info">
+            <p><strong>Địa chỉ:</strong> Q12, Tô Ký</p>
+            <p><strong>Số điện thoại:</strong> 091.5588.336</p>
+            <p><strong>Email:</strong> <a href="mailto:TruongAn@gmail.com">TruongAn@gmail.com</a></p>
+        </div>
+    </footer>
+</body>
+
+</html>
