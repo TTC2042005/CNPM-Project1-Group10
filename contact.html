@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Liên Hệ{% endblock title %}
+
+{% block styles %}
+<style>
+  /* CSS cho trang Liên Hệ */
+  .contact-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 50px 20px;
+  }
+  .contact-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .contact-header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+  .contact-content {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  .contact-form {
+    max-width: 600px;
+    margin: 20px auto;
+  }
+  .contact-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+  }
+  .contact-form button {
+    background: #e67e22;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .contact-form button:hover {
+    background: #cf711f;
+  }
+</style>
+{% endblock styles %}
+
+{% block content %}
+{% include 'partial/header.html' %}
+
+<!-- Nội dung trang Liên Hệ -->
+<section class="contact-container">
+  <div class="contact-header">
+    <h1>Liên Hệ</h1>
+  </div>
+  <div class="contact-content">
+    <p>Nếu bạn có bất kỳ thắc mắc hoặc yêu cầu hỗ trợ, hãy liên hệ với chúng tôi qua biểu mẫu dưới đây:</p>
+    <div class="contact-form">
+      <form id="contactForm" action="" method="post">
+        {% csrf_token %}
+        <label for="name">Họ và Tên:</label>
+        <input type="text" id="name" name="name" placeholder="Nhập tên của bạn" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Nhập email của bạn" required>
+        
+        <label for="message">Nội dung:</label>
+        <textarea id="message" name="message" rows="5" placeholder="Nhập tin nhắn của bạn" required></textarea>
+        
+        <button type="submit">Gửi Tin Nhắn</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% include 'partial/footer.html' %}
+{% endblock content %}
+
+{% block scripts %}
+<script>
+  // (Tùy chọn) Thêm xử lý xác thực form nếu cần
+  const contactForm = document.getElementById('contactForm');
+  contactForm.addEventListener('submit', function(event) {
+    // Thêm kiểm tra hợp lệ nếu cần, ví dụ:
+    // if (!validateForm()) {
+    //   event.preventDefault();
+    // }
+  });
+</script>
+{% endblock scripts %}

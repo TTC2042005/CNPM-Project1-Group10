@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Giới Thiệu{% endblock title %}
+
+{% block styles %}
+<style>
+  /* CSS cho trang Giới Thiệu */
+  .about-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 50px 20px;
+  }
+  .about-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .about-header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+  .about-content {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+</style>
+{% endblock styles %}
+
+{% block content %}
+{% include 'partial/header.html' %}
+
+<!-- Nội dung trang Giới Thiệu -->
+<section class="about-container">
+  <div class="about-header">
+    <h1>Giới Thiệu</h1>
+  </div>
+  <div class="about-content">
+    <p>
+      Chào mừng đến với cửa hàng cá Koi của chúng tôi! Với nhiều năm kinh nghiệm trong lĩnh vực nuôi cá Koi,
+      chúng tôi tự hào mang đến cho khách hàng những sản phẩm chất lượng cao, được chăm sóc cẩn thận và nuôi dưỡng theo phương pháp tự nhiên.
+    </p>
+    <p>
+      Tại cửa hàng của chúng tôi, bạn có thể tìm thấy nhiều loại cá Koi đa dạng, từ những chú cá Koi hồng, vàng, xanh đến cá Koi đen,
+      với sự phong phú về màu sắc và hình dáng. Chúng tôi cam kết luôn mang lại sự hài lòng và niềm vui cho khách hàng.
+    </p>
+    <p>
+      Hãy ghé thăm cửa hàng hoặc liên hệ với chúng tôi để biết thêm thông tin chi tiết.
+    </p>
+  </div>
+</section>
+
+{% include 'partial/footer.html' %}
+{% endblock content %}
+
+{% block scripts %}
+
+{% endblock scripts %}
