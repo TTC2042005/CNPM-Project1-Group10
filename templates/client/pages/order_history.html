@@ -1,0 +1,58 @@
+{% extends "../components/base.html" %}
+
+{% block title %}Lịch sử đơn hàng - Cá Koi Shop{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">📦 Lịch sử đơn hàng</h2>
+
+    {% if orders %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>Mã đơn hàng</th>
+                        <th>Ngày đặt</th>
+                        <th>Tổng tiền</th>
+                        <th>Trạng thái</th>
+                        <th>Cá đã đặt</th>
+                        <th>Thông tin nhận hàng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td class="text-center">#{{ order.id }}</td>
+                        <td class="text-center">{{ order.order_date|date:"d/m/Y H:i" }}</td>
+                        <td class="text-end">{{ order.total_amount }} VNĐ</td>
+                        <td class="text-center">
+                            {% if order.status == "pending" %}
+                                <span class="badge bg-warning text-dark">Chờ xử lý</span>
+                            {% elif order.status == "completed" %}
+                                <span class="badge bg-success">Hoàn thành</span>
+                            {% elif order.status == "canceled" %}
+                                <span class="badge bg-danger">Đã hủy</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <ul>
+                                {% for fish in order.koi_fish.all %}
+                                    <li>{{ fish.name }} - {{ fish.price }} VNĐ</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            <p><strong>Người nhận:</strong> {{ order.recipient_name }}</p>
+                            <p><strong>Điện thoại:</strong> {{ order.phone_number }}</p>
+                            <p><strong>Địa chỉ:</strong> {{ order.address }}</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center">Bạn chưa có đơn hàng nào.</div>
+    {% endif %}
+</div>
+{% endblock %}

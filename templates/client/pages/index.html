@@ -1,0 +1,177 @@
+{% extends "../components/base.html" %}
+
+{% block title %}Trang chủ{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f8f9fa; 
+        color: #333;
+    }
+
+    .hero {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .hero img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+    }
+
+    .hero .text-overlay {
+        position: absolute;
+        bottom: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        color: white;
+        font-size: 3rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        background: rgba(0, 0, 0, 0.5);
+        padding: 15px 30px;
+        border-radius: 8px;
+    }
+
+
+    section {
+        padding: 60px 0;
+    }
+
+
+    h2 {
+        color: #007bff;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+
+
+    .about img {
+        width: 100%;
+        border-radius: 8px;
+    }
+
+
+    .card {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .card img {
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .card-body {
+        text-align: center;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+
+    .testimonial {
+        background: #007bff;
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        font-style: italic;
+    }
+
+
+    .contact p {
+        font-size: 1.2rem;
+    }
+
+</style>
+<section class="hero">
+    <h1 class="text-overlay ">Chào mừng đến với cửa hàng cá Koi!</h1>
+    <img
+        src="https://assets.onecompiler.app/4328wxt9j/433822x6j/ca-koi-3.png"
+        alt="Cá Koi 3"
+    />  
+</section>
+
+
+<section class="container my-5">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h2>Về Chúng Tôi</h2>
+            <p>Chúng tôi chuyên cung cấp các loại cá Koi chất lượng cao, nhập khẩu từ Nhật Bản. Cam kết giá tốt nhất và bảo hành sức khỏe cá.</p>
+        </div>
+        <div class="col-md-6">
+            <img
+            src="https://assets.onecompiler.app/4328wxt9j/433822x6j/ca3f5481-ca-koi.jpeg"
+            alt="Cá Koi 1"
+          />
+        </div>
+    </div>
+</section>
+
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Các cá Koi mới nhất</h2>
+    <div class="row">
+        {% for koi in koi_fish %}
+            <div class="col-md-4">
+                <div class="card product">
+                    <img src="{{ koi.image }}" alt="{{ koi.name }}" class="card-img-top" />
+                    <div class="card-body">
+                        <h5 class="card-title">{{ koi.name }}</h5>
+                        <p class="card-text">Màu sắc: {{ koi.color }}, Kích thước: {{ koi.size }} cm</p>
+                        <a href="{% url 'detail-product' koi.id %}" class="btn btn-primary">Mua ngay</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+<section class="container my-5">
+    <h2 class="text-center">Khách Hàng Nói Gì?</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="testimonial">
+                <p>"Cá ở đây rất đẹp, giá hợp lý. Nhân viên tư vấn nhiệt tình!"</p>
+                <h6>- Anh Minh (TP.HCM)</h6>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="testimonial">
+                <p>"Mua cá Koi tại shop rất yên tâm, giao hàng nhanh, cá khỏe mạnh!"</p>
+                <h6>- Chị Lan (Hà Nội)</h6>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="container my-5">
+    <h2 class="text-center">Liên Hệ</h2>
+    <p class="text-center">Hotline: 0123456789 | Email: truongan05@gmail.com</p>
+</section>
+{% endblock %}

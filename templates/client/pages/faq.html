@@ -1,0 +1,29 @@
+{% extends "../components/base.html" %}
+
+{% block title %}Câu hỏi thường gặp - Cá Koi Shop{% endblock %}
+
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Câu hỏi thường gặp về Cá Koi</h2>
+    
+    <div class="accordion" id="faqAccordion">
+        {% for question in faq_list.questions %}
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+                <button class="accordion-button {% if forloop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="collapse{{ forloop.counter }}">
+                    <b>Câu hỏi:</b> {{ question.question }}
+                </button>
+            </h2>
+            <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                <a href="#">Câu trả lời:</a> {{ question.answer }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+
+</div>
+{% endblock %}
